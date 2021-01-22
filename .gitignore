@@ -1,2 +1,5 @@
 # Editor
 .idea
+
+#misc
+node_modules
