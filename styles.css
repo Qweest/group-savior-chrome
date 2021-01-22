@@ -1,0 +1,53 @@
+body {
+    margin: 0;
+}
+
+#root {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    width: 200px;
+    padding: 10px;
+    background-color: #242425;
+}
+
+.group {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+.group:last-child {
+    margin-bottom: 0;
+}
+
+.scale-anim:hover {
+    transform: scale(1.08);
+    transition: all 0.2s ease;
+}
+.scale-anim:active {
+    transform: scale(1);
+    transition: all 0.15s ease;
+}
+
+.group-title {
+    width: fit-content;
+    padding: 4px 6px;
+    color: #151212;
+    border-radius: 5px;
+    user-select: none;
+    cursor: pointer;
+}
+.group-title-saved {
+    width: 100%;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+.save-dot {
+    padding: 6px;
+    border-radius: 25px;
+    cursor: pointer;
+}
