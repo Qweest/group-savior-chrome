@@ -11,7 +11,7 @@ body {
   background-color: #242425;
 }
 
-.group {
+.group-wrapper {
   display: flex;
   flex: 1;
   flex-direction: row;
@@ -20,27 +20,18 @@ body {
   margin-bottom: 8px;
 }
 
-.group:last-child {
+.group-wrapper:last-child {
   margin-bottom: 0;
 }
 
-.scale-anim:hover {
-  transform: scale(1.08);
-  transition: all 0.2s ease;
-}
-
-.scale-anim:active {
-  transform: scale(1);
-  transition: all 0.15s ease;
-}
-
 .group-title {
+  display: flex;
+  justify-content: center;
   width: fit-content;
   padding: 4px 6px;
   color: #151212;
   border-radius: 5px;
   user-select: none;
-  cursor: pointer;
 }
 
 .group-title-saved {
@@ -52,5 +43,15 @@ body {
 .save-dot {
   padding: 6px;
   border-radius: 25px;
+}
+
+.scale-anim:hover {
+  transform: scale(1.08);
+  transition: all 0.2s ease;
   cursor: pointer;
+}
+
+.scale-anim:active {
+  transform: scale(1);
+  transition: all 0.15s ease;
 }
