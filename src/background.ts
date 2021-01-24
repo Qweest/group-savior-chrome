@@ -21,7 +21,6 @@ chrome.tabs.onUpdated.addListener(
     tab: { groupId: number; status: string },
   ) => {
     const { groupId, status } = tab;
-    console.log(tab);
 
     if (groupId === GROUP_ID_NONE || status !== TAB_STATUSES.complete) {
       return;
