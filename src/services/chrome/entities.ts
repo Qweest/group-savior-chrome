@@ -5,6 +5,7 @@ export interface TabGroup {
 
 export interface WindowGroup extends TabGroup {
   id: number;
+  collapsed: boolean;
 }
 
 export interface StorageGroup extends TabGroup {

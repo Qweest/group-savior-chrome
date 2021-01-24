@@ -5,10 +5,12 @@ export const toWindowGroup = ({
   id,
   title,
   color,
+  collapsed,
 }: WindowGroup): WindowGroup => ({
   id,
   title,
   color,
+  collapsed,
 });
 
 export const getStorage = async <T>(key: string): Promise<T> => {
@@ -94,6 +96,13 @@ export const saveGroup = async (title: string): Promise<StorageGroup> => {
 
 export const openGroup = async (title: string): Promise<void> => {
   const storageGroup = await getStorage<StorageGroup>(title);
+  const [windowGroup] = await getWindowGroups(title);
+
+  if (windowGroup) {
+    const { id, collapsed } = windowGroup;
+    await updateGroup(id, { collapsed: !collapsed });
+    return;
+  }
 
   if (storageGroup) {
     const { title, color, urls } = storageGroup;
@@ -130,7 +139,7 @@ export const combineTabs = async (tabIds: number[]): Promise<number> => {
 
 export const updateGroup = async (
   groupId: number,
-  options: TabGroup,
+  options: TabGroup | { collapsed?: boolean },
 ): Promise<WindowGroup> => {
   return new Promise((resolve) => {
     chrome.tabGroups.update(groupId, options, resolve);
