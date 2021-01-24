@@ -30,9 +30,10 @@ const slice = createSlice(initialState, {
   },
   removeGroup(state, action: Action<string>) {
     const title = action.payload;
+    const newTitles = state.savedTitles.filter((it) => it !== title);
 
     return {
-      savedTitles: state.savedTitles.filter((it) => it !== title),
+      savedTitles: newTitles,
     };
   },
 });

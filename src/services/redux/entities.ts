@@ -17,8 +17,8 @@ export interface DispatchThunk<State, Payload> {
   (thunk: Thunk<State, Payload>): void;
 }
 
-export interface Reducer<State, Payload> {
-  (state: State, action: Action<Payload>): State;
+export interface Reducer<State, PartialState = State, Payload = any> {
+  (state: State, action: Action<Payload>): PartialState;
 }
 
 export interface Action<Payload> {
@@ -26,19 +26,19 @@ export interface Action<Payload> {
   payload: Payload;
 }
 
-export interface Slice<State, Payload> {
-  reducer: Reducer<State, Payload>;
-  actions: SliceActions<Payload>;
+export interface Slice<State> {
+  reducer: Reducer<State>;
+  actions: SliceActions;
 }
 
 export interface SliceReducers<State> {
-  [x: string]: Reducer<Partial<State>, any>;
+  [x: string]: Reducer<State, Partial<State>>;
 }
 
-export interface SliceActions<Payload> {
+export interface SliceActions<Payload = any> {
   [x: string]: (payload: Payload) => Action<Payload>;
 }
 
-export interface Thunk<State, Payload> {
+export interface Thunk<State, Payload = any> {
   (dispatch: Dispatch<Payload>, getState: GetState<State>): void;
 }

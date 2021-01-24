@@ -5,6 +5,8 @@ built
 .cache
 coverage
 node-modules
+background.js
+background.js.map
 
 # Ignore all HTML files:
 *.html

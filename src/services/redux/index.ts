@@ -1,7 +1,7 @@
 import { Reducer, Slice, SliceActions, SliceReducers, Store } from './entities';
 
 export const createStore = <State, Payload>(
-  reducer: Reducer<State, Payload>,
+  reducer: Reducer<State, State, Payload>,
 ): Store<State, Payload> => {
   let state: State;
   let onStateChange = () => {};
@@ -29,14 +29,13 @@ export const createStore = <State, Payload>(
   return store;
 };
 
-export const createSlice = <State, Payload>(
+export const createSlice = <State>(
   initialState: State,
   reducers: SliceReducers<State>,
-): Slice<State, Payload> => {
+): Slice<State> => {
   const actionTypes = Object.keys(reducers);
-  console.log(actionTypes);
 
-  const actionCreators = actionTypes.reduce<SliceActions<Payload>>(
+  const actionCreators = actionTypes.reduce<SliceActions>(
     (acc, type) => ({
       ...acc,
       [type]: (payload) => ({ type, payload }),
@@ -44,14 +43,7 @@ export const createSlice = <State, Payload>(
     {},
   );
 
-  console.log(actionCreators);
-
-  const mainReducer: Reducer<State, Payload> = (
-    state = initialState,
-    action,
-  ) => {
-    console.log(action);
-    console.log(reducers[action.type]);
+  const mainReducer: Reducer<State> = (state = initialState, action) => {
     const newData = reducers[action.type](state, action);
 
     return {

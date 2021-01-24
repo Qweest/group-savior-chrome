@@ -8,9 +8,9 @@ import {
   saveGroup,
 } from '../services/chrome';
 import { AppThunk } from './index';
-import { actions, State } from './slice';
+import { actions } from './slice';
 
-export const initStateAsync = (): AppThunk<State> => async (dispatch) => {
+export const initStateAsync = (): AppThunk => async (dispatch) => {
   try {
     const storageGroups = (await getStorageGroups()) as TabGroup[];
     const windowGroups = (await getWindowGroups()) as TabGroup[];
@@ -25,9 +25,7 @@ export const initStateAsync = (): AppThunk<State> => async (dispatch) => {
   }
 };
 
-export const saveGroupAsync = <T>(title: T): AppThunk<T> => async (
-  dispatch,
-) => {
+export const saveGroupAsync = (title: string): AppThunk => async (dispatch) => {
   try {
     await saveGroup(title);
     dispatch(actions.saveGroup(title));
@@ -37,7 +35,7 @@ export const saveGroupAsync = <T>(title: T): AppThunk<T> => async (
   }
 };
 
-export const removeGroupAsync = <T>(title: T): AppThunk<T> => async (
+export const removeGroupAsync = (title: string): AppThunk => async (
   dispatch,
 ) => {
   try {
@@ -49,7 +47,7 @@ export const removeGroupAsync = <T>(title: T): AppThunk<T> => async (
   }
 };
 
-export const openGroupAsync = <T>(title: T): AppThunk<T> => async () => {
+export const openGroupAsync = (title: string): AppThunk => async () => {
   try {
     await openGroup(title);
   } catch (e) {
