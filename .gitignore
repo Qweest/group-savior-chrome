@@ -7,3 +7,5 @@ node_modules
 #parcel
 .cache
 dist
+background.js
+background.js.map
