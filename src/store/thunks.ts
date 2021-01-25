@@ -40,7 +40,8 @@ export const removeGroupAsync = (title: string): AppThunk => async (
 ) => {
   try {
     await removeStorageGroup(title);
-    dispatch(actions.removeGroup(title));
+    const [windowGroup] = await getWindowGroups(title);
+    dispatch(actions.removeGroup({ title, isOpened: !!windowGroup }));
   } catch (e) {
     console.log(e);
     throw e;
