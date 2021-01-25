@@ -31,6 +31,13 @@ export const removeStorage = async (key: string): Promise<void> => {
   });
 };
 
+export const clearStorage = async (): Promise<void> => {
+  await new Promise<void>((resolve) => {
+    chrome.storage.sync.clear(resolve);
+  });
+  await setStorage(TITLES_KEY, []);
+};
+
 export const setStorageGroup = async (group: StorageGroup): Promise<void[]> => {
   const { title } = group;
   const titles = await getStorage<string[]>(TITLES_KEY);
@@ -42,14 +49,16 @@ export const setStorageGroup = async (group: StorageGroup): Promise<void[]> => {
   ]);
 };
 
-export const removeStorageGroup = async (title: string): Promise<void[]> => {
+export const removeStorageGroup = async (title: string): Promise<string[]> => {
   const titles = await getStorage<string[]>(TITLES_KEY);
   const newTitles = titles.filter((it) => it !== title);
 
-  return Promise.all([
+  Promise.all([
     await setStorage(TITLES_KEY, newTitles),
     await removeStorage(title),
   ]);
+
+  return newTitles;
 };
 
 export const getStorageGroups = async (): Promise<StorageGroup[]> => {
@@ -92,6 +101,16 @@ export const saveGroup = async (title: string): Promise<StorageGroup> => {
   await setStorageGroup(newGroup);
 
   return newGroup;
+};
+
+export const saveAllGroups = async (): Promise<StorageGroup[]> => {
+  const windowGroups = await getWindowGroups();
+
+  for (let i = 0; i < windowGroups.length; i++) {
+    await saveGroup(windowGroups[i].title);
+  }
+
+  return await getStorageGroups();
 };
 
 export const openGroup = async (title: string): Promise<void> => {

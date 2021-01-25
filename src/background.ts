@@ -11,7 +11,11 @@ import {
 } from './services/chrome/constants';
 
 chrome.runtime.onInstalled.addListener(async () => {
-  await setStorage(TITLES_KEY, []);
+  const titles = await getStorage(TITLES_KEY);
+
+  if (!titles) {
+    await setStorage(TITLES_KEY, []);
+  }
 });
 
 chrome.tabs.onUpdated.addListener(

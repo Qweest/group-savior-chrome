@@ -1,57 +1,7 @@
+html, body, #root {
+  height: 100%;
+}
+
 body {
   margin: 0;
-}
-
-#root {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  width: 200px;
-  padding: 10px;
-  background-color: #242425;
-}
-
-.group-wrapper {
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.group-wrapper:last-child {
-  margin-bottom: 0;
-}
-
-.group-title {
-  display: flex;
-  justify-content: center;
-  width: fit-content;
-  padding: 4px 6px;
-  color: #151212;
-  border-radius: 5px;
-  user-select: none;
-}
-
-.group-title-saved {
-  width: 100%;
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
-}
-
-.save-dot {
-  padding: 6px;
-  border-radius: 25px;
-}
-
-.scale-anim:hover {
-  transform: scale(1.08);
-  transition: all 0.2s ease;
-  cursor: pointer;
-}
-
-.scale-anim:active {
-  transform: scale(1);
-  transition: all 0.15s ease;
 }
