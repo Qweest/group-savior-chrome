@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dev": "parcel watch src/index.html --public-url ./ --no-hmr & parcel watch src/background.ts -d ./ --no-hmr",
-    "build": "parcel build src/index.html --public-url ./"
+    "build": "parcel build src/index.html --public-url ./ && parcel build src/background.ts -d ./"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",
