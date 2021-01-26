@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { distinct } from '../../services/chrome/helpers';
 import { TabGroup } from '../../services/chrome/entities';
 import {
-  clearStorage,
   getStorageGroups,
   getWindowGroups,
   saveAllGroups,
@@ -62,12 +61,6 @@ const App: React.FC = () => {
       setAllSaved(true);
       return;
     }
-
-    await clearStorage();
-    const windowGroups = (await getWindowGroups()) as TabGroup[];
-
-    setGroups(windowGroups);
-    setAllSaved(false);
   };
 
   return (
