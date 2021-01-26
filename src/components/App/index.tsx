@@ -11,12 +11,14 @@ import {
 import Group from '../Group';
 import {
   Wrapper,
+  InfoText,
+  Header,
   GroupsWrapper,
   Separator,
   ActionsWrapper,
   AddAll,
-  RemoveAll,
 } from './styles';
+import { REPO_URL } from './constants';
 
 const App: React.FC = () => {
   const [groups, setGroups] = useState<TabGroup[]>([]);
@@ -53,13 +55,14 @@ const App: React.FC = () => {
   };
 
   const handleSaveAll = async () => {
-    const storageGroups = (await saveAllGroups()) as TabGroup[];
+    if (!allSaved) {
+      const storageGroups = (await saveAllGroups()) as TabGroup[];
 
-    setGroups(storageGroups);
-    setAllSaved(true);
-  };
+      setGroups(storageGroups);
+      setAllSaved(true);
+      return;
+    }
 
-  const handleRemoveAll = async () => {
     await clearStorage();
     const windowGroups = (await getWindowGroups()) as TabGroup[];
 
@@ -69,32 +72,39 @@ const App: React.FC = () => {
 
   return (
     <Wrapper>
-      <GroupsWrapper>
-        {groups.map((group) => {
-          return (
-            <Group
-              key={group.title}
-              group={group}
-              onRemoved={handleRemoved}
-              onSaved={handleSaved}
+      <Header href={REPO_URL} target="_blank">
+        Group Saviour
+      </Header>
+      {groups.length ? (
+        <React.Fragment>
+          <GroupsWrapper>
+            {groups.map((group) => {
+              return (
+                <Group
+                  key={group.title}
+                  group={group}
+                  onRemoved={handleRemoved}
+                  onSaved={handleSaved}
+                />
+              );
+            })}
+          </GroupsWrapper>
+          <Separator />
+          <ActionsWrapper>
+            <AddAll
+              size={24}
+              title="Save all groups"
+              $saved={allSaved}
+              onClick={handleSaveAll}
             />
-          );
-        })}
-      </GroupsWrapper>
-      <Separator />
-      <ActionsWrapper>
-        <AddAll
-          size={32}
-          title="Save all groups"
-          $saved={allSaved}
-          onClick={handleSaveAll}
-        />
-        <RemoveAll
-          size={32}
-          title="Remove all groups"
-          onClick={handleRemoveAll}
-        />
-      </ActionsWrapper>
+          </ActionsWrapper>
+        </React.Fragment>
+      ) : (
+        <InfoText>
+          No groups detected. Please create at least one tab group to manage
+          it...
+        </InfoText>
+      )}
     </Wrapper>
   );
 };

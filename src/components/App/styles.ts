@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { HiOutlineColorSwatch, HiOutlineBan } from 'react-icons/hi';
+import styled, { css } from 'styled-components';
+import { HiOutlineFolderDownload } from 'react-icons/hi';
 
 interface AddAllProps {
   $saved: boolean;
@@ -8,15 +8,40 @@ interface AddAllProps {
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 100%;
   width: 200px;
-  background-color: #242425;
+  margin: 10px;
+  border-radius: 8px;
+  background-color: #343439;
+`;
+
+export const InfoText = styled.div`
+  min-height: 130px;
+  margin: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #848485;
+`;
+
+export const Header = styled.a`
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'Andale Mono', sans-serif;
+  text-decoration: underline;
+  color: wheat;
+  margin: 10px;
+  transition: all 0.2s ease;
+  user-select: none;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 export const GroupsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 10px;
+  min-height: 100px;
 `;
 
 export const Separator = styled.div`
@@ -28,32 +53,21 @@ export const Separator = styled.div`
 export const ActionsWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin: 0 10px 10px;
 `;
 
-export const AddAll = styled(HiOutlineColorSwatch)<AddAllProps>`
-  cursor: pointer;
-  color: ${({ $saved }) => ($saved ? 'wheat' : 'white')};
-
-  &:hover {
-    color: #f5deb3;
-    transform: scale(1.1);
-    transition: all 0.2s ease;
-  }
-
-  &:active {
-    transform: scale(0.9);
-    transition: all 0.1s ease;
-  }
+const savedAll = css`
+  color: greenyellow;
+  fill: rgba(173, 255, 47, 0.1);
 `;
 
-export const RemoveAll = styled(HiOutlineBan)`
+export const AddAll = styled(HiOutlineFolderDownload)<AddAllProps>`
   cursor: pointer;
-  color: orangered;
+  color: white;
 
   &:hover {
-    color: #c10818;
+    color: greenyellow;
     transform: scale(1.1);
     transition: all 0.2s ease;
   }
@@ -62,4 +76,6 @@ export const RemoveAll = styled(HiOutlineBan)`
     transform: scale(0.9);
     transition: all 0.1s ease;
   }
+
+  ${({ $saved }) => ($saved ? savedAll : '')};
 `;

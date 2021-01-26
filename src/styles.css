@@ -1,7 +1,8 @@
-html, body, #root {
-  height: 100%;
+html, body {
+  height: fit-content;
 }
 
 body {
   margin: 0;
+  background-color: #242425;
 }

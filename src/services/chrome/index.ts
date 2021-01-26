@@ -84,6 +84,21 @@ export const getWindowGroups = async (
   });
 };
 
+export const removeStorageGroups = async (): Promise<string[]> => {
+  const storageGroups = await getStorageGroups();
+  const windowGroups = await getWindowGroups();
+  const windowGroupsTitles = windowGroups.map((it) => it.title);
+  const storageTitlesToRemove = storageGroups
+    .filter((it) => windowGroupsTitles.includes(it.title))
+    .map((it) => it.title);
+
+  for (let i = 0; i < storageTitlesToRemove.length; i++) {
+    await removeStorageGroup(storageTitlesToRemove[i]);
+  }
+
+  return storageTitlesToRemove;
+};
+
 export const saveGroup = async (title: string): Promise<StorageGroup> => {
   const groups = await getWindowGroups(title);
   const color = groups[0].color;
