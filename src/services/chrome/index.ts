@@ -118,14 +118,12 @@ export const saveGroup = async (title: string): Promise<StorageGroup> => {
   return newGroup;
 };
 
-export const saveAllGroups = async (): Promise<StorageGroup[]> => {
+export const saveAllGroups = async (): Promise<void> => {
   const windowGroups = await getWindowGroups();
 
   for (let i = 0; i < windowGroups.length; i++) {
     await saveGroup(windowGroups[i].title);
   }
-
-  return await getStorageGroups();
 };
 
 export const openGroup = async (title: string): Promise<void> => {

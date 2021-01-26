@@ -55,11 +55,11 @@ const App: React.FC = () => {
 
   const handleSaveAll = async () => {
     if (!allSaved) {
-      const storageGroups = (await saveAllGroups()) as TabGroup[];
+      await saveAllGroups();
+      const storageGroups = (await getStorageGroups()) as TabGroup[];
 
       setGroups(storageGroups);
       setAllSaved(true);
-      return;
     }
   };
 
