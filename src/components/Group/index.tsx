@@ -19,6 +19,7 @@ const Group: React.FC<Props> = (props) => {
   const { group, onRemoved, onSaved } = props;
   const { title, color } = group;
   const [saved, setSaved] = useState(false);
+  const [showRemove, setShowRemove] = useState(false);
 
   useEffect(() => {
     const init = async () => {
@@ -37,21 +38,35 @@ const Group: React.FC<Props> = (props) => {
 
     await saveGroup(title);
     setSaved(true);
+    setShowRemove(true);
     onSaved(title);
   };
 
   const handleRemoveClick = async () => {
     await removeStorageGroup(title);
     setSaved(false);
+    setShowRemove(false);
     onRemoved(title);
   };
 
+  const handleMouseOver = () => {
+    if (saved) {
+      setShowRemove(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (saved) {
+      setShowRemove(false);
+    }
+  };
+
   return (
-    <Wrapper>
+    <Wrapper onMouseEnter={handleMouseOver} onMouseLeave={handleMouseLeave}>
       <Title onClick={handleTitleClick} color={color} saved={saved}>
         {title}
       </Title>
-      <RemoveButton size={25} onClick={handleRemoveClick} $saved={saved} />
+      <RemoveButton onClick={handleRemoveClick} $show={showRemove} />
     </Wrapper>
   );
 };

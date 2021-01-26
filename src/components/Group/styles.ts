@@ -9,10 +9,11 @@ interface TitleWrapperProps {
 }
 
 interface RemoveButtonProps {
-  $saved: boolean;
+  $show: boolean;
 }
 
 export const Wrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -69,24 +70,34 @@ const removeButtonHidden = css`
   visibility: hidden;
   width: 0;
   padding: 0;
+
+  &:hover {
+    padding: 0;
+  }
 `;
 
 export const RemoveButton = styled(HiOutlineTrash)<RemoveButtonProps>`
   visibility: visible;
-  padding: 0 4px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 16px;
+  height: 25px;
+  padding: 0 8px;
   background-color: #d73c0b;
   color: #6d0707;
   user-select: none;
   cursor: pointer;
-  transition: all 0.1s ease-out;
+  transition: all 0.2s ease-out;
 
   &:hover {
     color: #ffc9c9;
+    padding: 0 10px;
   }
 
   &:active {
     padding-left: 16px;
   }
 
-  ${({ $saved }) => ($saved ? '' : removeButtonHidden)};
+  ${({ $show }) => ($show ? '' : removeButtonHidden)};
 `;
