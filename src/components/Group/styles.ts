@@ -27,7 +27,7 @@ export const Wrapper = styled.div`
 
 const titleSaved = css`
   max-width: 100% !important;
-  border-radius: 0;
+  border-radius: 2px;
 
   &:hover {
     opacity: 0.8;
@@ -55,7 +55,7 @@ export const Title = styled.div<TitleWrapperProps>`
   cursor: pointer;
 
   &:hover {
-    border-radius: 0;
+    border-radius: 2px;
     max-width: 110px;
   }
 
@@ -84,6 +84,8 @@ export const RemoveButton = styled(HiOutlineTrash)<RemoveButtonProps>`
   width: 16px;
   height: 25px;
   padding: 0 8px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
   background-color: #d73c0b;
   color: #6d0707;
   user-select: none;
