@@ -1,0 +1,1 @@
+{"version":3,"sources":["styles.css"],"names":[],"mappings":"AAAA,UACE,kBACF,CAEA,KACE,QAAS,CACT,wBACF","file":"styles.7016f717.css","sourceRoot":"../src","sourcesContent":["html, body {\n  height: fit-content;\n}\n\nbody {\n  margin: 0;\n  background-color: #242425;\n}"]}

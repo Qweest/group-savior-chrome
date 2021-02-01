@@ -1,11 +1,8 @@
 # Editor
 .idea
 
+# Parsel
+.cache
+
 #misc
 node_modules
-
-#parcel
-.cache
-dist
-background.js
-background.js.map
